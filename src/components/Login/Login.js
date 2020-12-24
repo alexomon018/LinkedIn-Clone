@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
+
 import './Login.css'
 
-function Login() {
+function Login({ register }) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [profilePicUrl, setProfilePicUrl] = useState('')
-  const register = () => {}
-  const loginToApp = () => {}
+
+  const loginToApp = (e) => {
+    e.preventDefault()
+  }
   return (
     <div className='login'>
       <img
@@ -45,7 +48,10 @@ function Login() {
       </form>
       <p>
         Not a member ?{' '}
-        <span className='login__register' onClick={register}>
+        <span
+          className='login__register'
+          onClick={() => register(name, profilePicUrl, email, password)}
+        >
           Register Now
         </span>
       </p>

@@ -5,14 +5,14 @@ import Feed from './components/Feed/Feed'
 import { useGlobalContext } from './context'
 import Login from './components/Login/Login'
 function App() {
-  const { user } = useGlobalContext()
+  const { user, register } = useGlobalContext()
   console.log(user)
 
   return (
     <div className='app'>
       <Header />
       {!user ? (
-        <Login />
+        <Login register={register} />
       ) : (
         <div className='app__body'>
           <Sidebar />
