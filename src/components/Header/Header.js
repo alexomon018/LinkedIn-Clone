@@ -1,6 +1,6 @@
 import React from 'react'
 import './Header.css'
-import HeaderOption from '../HeaderOption/HeaderOption'
+import HeaderOption from './HeaderOption/HeaderOption'
 import SearchIcon from '@material-ui/icons/Search'
 import HomeIcon from '@material-ui/icons/Home'
 import SuppervisorAccountIcon from '@material-ui/icons/SupervisorAccount'
@@ -16,7 +16,7 @@ function Header() {
 
         <div className='header__search'>
           <SearchIcon />
-          <input type='text' />
+          <input type='text' placeholder='Serach' />
         </div>
       </div>
       <div className='header__right'>
