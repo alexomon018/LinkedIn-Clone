@@ -3,6 +3,7 @@ import './Feed.css'
 import CreateIcon from '@material-ui/icons/Create'
 import InputOption from '../InputOption/InputOption'
 import ImageIcon from '@material-ui/icons/Image'
+import FlipMove from 'react-flip-move'
 import { CalendarViewDay, EventNote, Subscriptions } from '@material-ui/icons'
 import Post from '../Post/Post'
 import { db } from '../../firebase'
@@ -64,15 +65,17 @@ function Feed({ user }) {
         </div>
       </div>
       {/* Posts */}
-      {posts.map(({ id, data: { name, description, message, photoUrl } }) => (
-        <Post
-          key={id}
-          name={name}
-          description={description}
-          message={message}
-          photoURL={photoUrl}
-        />
-      ))}{' '}
+      <FlipMove>
+        {posts.map(({ id, data: { name, description, message, photoUrl } }) => (
+          <Post
+            key={id}
+            name={name}
+            description={description}
+            message={message}
+            photoURL={photoUrl}
+          />
+        ))}
+      </FlipMove>
     </div>
   )
 }

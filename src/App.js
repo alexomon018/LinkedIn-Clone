@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar/Sidebar'
 import Feed from './components/Feed/Feed'
 import { useGlobalContext } from './context'
 import Login from './components/Login/Login'
+import Widgets from './components/Widgets/Widgets'
 function App() {
   const { user, register, loginToApp } = useGlobalContext()
   console.log(user)
@@ -17,6 +18,7 @@ function App() {
         <div className='app__body'>
           <Sidebar user={user} />
           <Feed user={user} />
+          <Widgets />
         </div>
       )}
     </div>
