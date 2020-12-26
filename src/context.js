@@ -15,7 +15,7 @@ const AppProvider = ({ children }) => {
       return alert('Please enter a full name')
     }
     auth
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email.trim(), password)
       .then((userAuth) => {
         userAuth.user
           .updateProfile({
@@ -35,6 +35,27 @@ const AppProvider = ({ children }) => {
           })
       })
       .catch((error) => alert(error.message))
+  }
+
+  const loginToApp = (email, password) => {
+    auth
+      .signInWithEmailAndPassword(email.trim(), password)
+      .then((userAuth) => {
+        dispatch({
+          type: 'USER_LOGIN',
+          payload: {
+            email: userAuth.user.email,
+            uid: userAuth.user.uid,
+            displayName: userAuth.user.displayName,
+            profilePicUrl: userAuth.user.photoURL,
+          },
+        })
+      })
+      .catch((error) => console.log(error))
+  }
+  const logoutOfApp = () => {
+    dispatch({ type: 'USER_LOGOUT' })
+    auth.signOut()
   }
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
@@ -58,6 +79,8 @@ const AppProvider = ({ children }) => {
       value={{
         ...state,
         register,
+        logoutOfApp,
+        loginToApp,
       }}
     >
       {children}

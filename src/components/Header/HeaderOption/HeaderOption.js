@@ -1,11 +1,17 @@
 import { Avatar } from '@material-ui/core'
 import React from 'react'
 import './HeaderOption.css'
-function HeaderOption({ Icon, title, avatar }) {
+import { useGlobalContext } from '../../../context'
+function HeaderOption({ Icon, title, avatar, onClick }) {
+  const { user } = useGlobalContext()
   return (
-    <div className='headerOption'>
+    <div onClick={onClick} className='headerOption'>
       {Icon && <Icon className='headerOption__icon' />}
-      {avatar && <Avatar className='headerOption__icon' src={avatar} />}
+      {avatar && (
+        <Avatar className='headerOption__icon' src={user?.photoUrl}>
+          {user?.email[0]}
+        </Avatar>
+      )}
       <h3 className='headerOption__title'>{title}</h3>
     </div>
   )

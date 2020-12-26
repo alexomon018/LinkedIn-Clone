@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
-
 import './Login.css'
 
-function Login({ register }) {
+function Login({ register, loginToApp }) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [profilePicUrl, setProfilePicUrl] = useState('')
 
-  const loginToApp = (e) => {
-    e.preventDefault()
-  }
   return (
     <div className='login'>
       <img
@@ -31,18 +27,26 @@ function Login({ register }) {
           onChange={(e) => setProfilePicUrl(e.target.value)}
         />
         <input
-          type='text'
+          type='email'
+          name='email'
           placeholder='Email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type='password'
+          name='password'
           placeholder='Password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type='submit' onClick={loginToApp}>
+        <button
+          type='submit'
+          onClick={(e) => {
+            e.preventDefault()
+            loginToApp(email, password)
+          }}
+        >
           Sign In
         </button>
       </form>

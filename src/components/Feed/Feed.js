@@ -7,11 +7,9 @@ import { CalendarViewDay, EventNote, Subscriptions } from '@material-ui/icons'
 import Post from '../Post/Post'
 import { db } from '../../firebase'
 import firebase from 'firebase'
-function Feed() {
+function Feed({ user }) {
   const [posts, setPosts] = useState([])
   const [input, setInput] = useState('')
-
-  console.log(input)
 
   useEffect(() => {
     db.collection('posts')
@@ -29,10 +27,10 @@ function Feed() {
   const sendPost = (e) => {
     e.preventDefault()
     db.collection('posts').add({
-      name: 'Aleksa Mitic',
-      description: 'This is a test',
+      name: user.displayName,
+      description: user.email,
       message: input,
-      photoUrl: '',
+      photoUrl: user.photoUrl || '',
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     })
     setInput('')
@@ -75,11 +73,6 @@ function Feed() {
           photoURL={photoUrl}
         />
       ))}{' '}
-      <Post
-        name='Aleksa Mitic'
-        description='This is a test'
-        input='Wow this works'
-      />
     </div>
   )
 }
